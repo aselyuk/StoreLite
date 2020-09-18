@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         String tag = view.getTag().toString();
         String packageName = getPackageName();
         try {
-            Class<?> finedClass = Class.forName(packageName + "." + tag + "Activity");
-            Intent intent = new Intent(this, finedClass);
+            Class<?> foundClass = Class.forName(packageName + "." + tag + "Activity");
+            Intent intent = new Intent(this, foundClass);
             startActivity(intent);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
