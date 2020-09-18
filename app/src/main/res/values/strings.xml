@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">StoreLite</string>
+    <string name="btn_inventory">Инвентаризация</string>
+    <string name="btn_accept">Приёмка</string>
+    <string name="btn_barcodes">Штрихкоды</string>
+    <string name="btn_products">Номенклатура</string>
+
+    <string name="txt_docs">Документы</string>
+    <string name="txt_refs">Справочники</string>
+    <string name="txt_actions">Действия</string>
+
+    <string name="title_inventory">Инвентаризация</string>
+    <string name="title_accept">Приёмка</string>
+    <string name="title_barcodes">Штрихкоды</string>
+    <string name="title_products">Номенклатура</string>
+
+    <!-- Menu Products -->
+    <string name="menu_exchange">Обмен данными</string>
+    <string name="menu_products_import">Загрузить из файла</string>
+    <string name="menu_products_export">Выгрузить в файл</string>
+
+    <string name="list_item_name">Наименование</string>
+    <string name="list_item_articleNumber">Артикул</string>
+
+</resources>
