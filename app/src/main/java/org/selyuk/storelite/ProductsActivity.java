@@ -1,12 +1,20 @@
 package org.selyuk.storelite;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.provider.DocumentsContract;
+import android.telephony.emergency.EmergencyNumber;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +24,9 @@ import android.widget.Toast;
 
 import org.selyuk.storelite.models.Product;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +34,8 @@ import java.util.List;
 public class ProductsActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    String FileName = "";
 
     List<Product> products = new ArrayList<>();
     ListView productList;
@@ -72,11 +85,40 @@ public class ProductsActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Uri uri = data.getData();
-                String id = DocumentsContract.getDocumentId(uri).split(":")[1];
-                String FileName = Environment.getExternalStorageDirectory()+"/"+id;
+                File file = new File(uri.getPath());//create path from uri
+                String path = file.getAbsolutePath();
+                final String[] split = file.getPath().split(":");//split the path.
+                FileName = Environment.getExternalStorageDirectory() + "/" +
+                        Environment.DIRECTORY_DOCUMENTS + "/" +
+                        split[1];
+                requestMultiplePermissions();
+            }
+        }
+    }
+
+    public void requestMultiplePermissions() {
+        ActivityCompat.requestPermissions(this,
+                new String[] {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                },
+                PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        // проверка по запрашиваемому коду
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // разрешение успешно получено
                 Exchange.UploadProducts(FileName, productsAdapter);
                 productsAdapter.notifyDataSetChanged();
+            } else {
+                // разрешение не получено
             }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
