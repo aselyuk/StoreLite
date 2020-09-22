@@ -6,4 +6,7 @@
     <item
         android:title="@string/menu_products_export"
         android:id="@+id/mProductExport"/>
+    <item
+        android:title="@string/menu_products_delete"
+        android:id="@+id/mProductDelete"/>
 </menu>

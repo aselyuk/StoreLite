@@ -18,6 +18,7 @@
     <string name="menu_exchange">Обмен данными</string>
     <string name="menu_products_import">Загрузить из файла</string>
     <string name="menu_products_export">Выгрузить в файл</string>
+    <string name="menu_products_delete">Удалить всё</string>
 
     <string name="list_item_name">Наименование</string>
     <string name="list_item_articleNumber">Артикул</string>

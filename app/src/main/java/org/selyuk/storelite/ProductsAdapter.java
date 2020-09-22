@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.selyuk.storelite.models.Product;
@@ -29,14 +28,13 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
 
         View view = inflater.inflate(this.layout, parent, false);
 
-        ImageView imangeView = (ImageView) view.findViewById(R.id.image);
         TextView nameView = (TextView) view.findViewById(R.id.name);
         TextView articleView = (TextView) view.findViewById(R.id.articleNumber);
 
         Product product = products.get(position);
 
-        nameView.setText(product.getName());
-        articleView.setText(product.getArticleNumber());
+        nameView.setText(product.name);
+        articleView.setText(product.articleNumber);
 
         return view;
     }
